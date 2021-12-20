@@ -1,0 +1,1563 @@
+{
+    "info": {
+        "_postman_id": "eafc1f8c-2617-47d4-bc56-082b03570366",
+        "name": "Mobile Banking API",
+        "description": "This is a sample API simulating how a mobile banking application might interact with the banking services.\n\nContact Support:\n Email: solutions@postman.com",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "accounts",
+            "item": [
+                {
+                    "name": "{account Id}",
+                    "item": [
+                        {
+                            "name": "Get an Account by ID",
+                            "id": "f4faa57e-a2df-49f7-8ba5-00cad4f7e21d",
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            },
+                            "request": {
+                                "auth": {
+                                    "type": "oauth2"
+                                },
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/accounts/:accountId",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "accounts",
+                                        ":accountId"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "accountId",
+                                            "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                            "description": "(Required) ID of the account to return"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": [
+                                {
+                                    "id": "972bf471-59d9-4c10-bbd7-14f44ee9f153",
+                                    "name": "Returns the account referenced by the ID",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/accounts/:accountId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "accounts",
+                                                ":accountId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "accountId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) ID of the account to return"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"name\": \"Everyday Savings Account\",\n \"type\": \"SAVINGS\",\n \"id\": \"75778ec9-d158-ab34-93e3-87cde1303df8\",\n \"status\": \"OPEN\",\n \"balance\": 249.93,\n \"created\": \"2021-07-21T17:32:28Z\"\n}"
+                                },
+                                {
+                                    "id": "dcf4fa4a-2df2-4379-9a1f-356be8541ceb",
+                                    "name": "Invalid ID supplied",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/accounts/:accountId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "accounts",
+                                                ":accountId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "accountId",
+                                                    "value": "[not a valid id]",
+                                                    "description": "(Required) ID of the account to return"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                },
+                                {
+                                    "id": "06b4a6fe-6496-4e6f-9659-9c599d367573",
+                                    "name": "Account not found",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/accounts/:accountId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "accounts",
+                                                ":accountId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "accountId",
+                                                    "value": "1234",
+                                                    "description": "(Required) ID of the account to return"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Not Found",
+                                    "code": 404,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Deletes an Account by ID",
+                            "id": "793f3547-96eb-458c-8c52-e5b2dcba429b",
+                            "request": {
+                                "auth": {
+                                    "type": "oauth2"
+                                },
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/accounts/:accountId",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "accounts",
+                                        ":accountId"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "id": "530076c1-9511-4d12-9f3f-f9703046ff6e",
+                                            "key": "accountId",
+                                            "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                            "description": "(Required) Account ID to delete"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": [
+                                {
+                                    "id": "457807c8-4631-460c-8c42-7b3056120116",
+                                    "name": "Account Deleted successfully",
+                                    "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/accounts/:accountId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "accounts",
+                                                ":accountId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "accountId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) Account ID to delete"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "No Content",
+                                    "code": 204,
+                                    "_postman_previewlanguage": "text",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "text/plain"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": ""
+                                },
+                                {
+                                    "id": "0e710f8b-e94b-4599-8e5a-cbe49cef73f0",
+                                    "name": "Invalid ID supplied",
+                                    "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/accounts/:accountId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "accounts",
+                                                ":accountId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "accountId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) Account ID to delete"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                },
+                                {
+                                    "id": "c41a4b8a-d69d-4eae-84cb-1e9bd9aa034e",
+                                    "name": "Account not found",
+                                    "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/accounts/:accountId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "accounts",
+                                                ":accountId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "accountId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) Account ID to delete"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Not Found",
+                                    "code": 404,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Get an Account Transactions by ID",
+                            "id": "fa998d16-99d4-4c42-9159-6b24876d58c5",
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            },
+                            "request": {
+                                "auth": {
+                                    "type": "noauth"
+                                },
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/accounts/:accountId/transactions",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "transactions"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "id": "a17489f8-086d-4551-a62a-7fbb8443c6b5",
+                                            "key": "accountId",
+                                            "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                            "description": "(Required) ID of the account to search"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": [
+                                {
+                                    "id": "3395e39d-0b8d-4e73-8fa5-6ee75795fb11",
+                                    "name": "Returns the transactions for the referenced account",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/accounts/:accountId/transactions",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "accounts",
+                                                ":accountId",
+                                                "transactions"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "accountId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) ID of the account to search"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "[\n {\n  \"id\": \"584c0f97-7aeb-4000-bf1e-291c2ac4199b\",\n  \"created\": \"2021-07-21T17:32:28Z\",\n  \"amount\": 120,\n  \"paymentReference\": \"aa7fdd48-78ac-420f-8438-0ac9ae3c8bc8\",\n  \"recipient\": {\n   \"id\": \"cdfd6d52-9eb3-48e1-94f6-eef56994fb55\",\n   \"name\": \"Insurance Inc\",\n   \"description\": \"Car Insurance Monthly Payment\",\n   \"reference\": \"20892002\"\n  }\n },\n {\n  \"id\": \"584c0f97-7aeb-4000-bf1e-291c2ac4199b\",\n  \"created\": \"2021-07-21T17:32:28Z\",\n  \"amount\": 120,\n  \"paymentReference\": \"aa7fdd48-78ac-420f-8438-0ac9ae3c8bc8\",\n  \"recipient\": {\n   \"id\": \"cdfd6d52-9eb3-48e1-94f6-eef56994fb55\",\n   \"name\": \"Insurance Inc\",\n   \"description\": \"Car Insurance Monthly Payment\",\n   \"reference\": \"20892002\"\n  }\n }\n]"
+                                },
+                                {
+                                    "id": "559ebdcc-1d94-4892-8edb-47b573ed8313",
+                                    "name": "Invalid ID supplied",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/accounts/:accountId/transactions",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "accounts",
+                                                ":accountId",
+                                                "transactions"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "accountId",
+                                                    "value": "ABCD",
+                                                    "description": "(Required) ID of the account to search"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 400,\n \"message\": \"Your account ID was not found or invalid. Please contact support@pmbank.com.\"\n}"
+                                },
+                                {
+                                    "id": "4557e58b-6c06-4cf9-9269-d6ea909c9f8d",
+                                    "name": "Account not found",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/accounts/:accountId/transactions",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "accounts",
+                                                ":accountId",
+                                                "transactions"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "accountId",
+                                                    "value": "1234",
+                                                    "description": "(Required) ID of the account to search"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Not Found",
+                                    "code": 404,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 404,\n \"message\": \"Your account ID was not found or invalid. Please contact support@pmbank.com.\"\n}"
+                                }
+                            ]
+                        }
+                    ],
+                    "id": "e5d3fbe1-7ca0-4660-ae99-975147b2ded9"
+                },
+                {
+                    "name": "Returns the list of accounts for the user",
+                    "id": "e4372bf1-83b6-48f1-b738-3b3b0db88db2",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "auth": {
+                            "type": "oauth2"
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/accounts",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "accounts"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "id": "78c85125-0105-4ae0-8acc-102d3fa366bb",
+                            "name": "Returns the list of accounts available to the user",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/accounts",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "accounts"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "[\n {\n  \"name\": \"Everyday Savings Account\",\n  \"type\": \"SAVINGS\",\n  \"id\": \"f187170c-f84e-497a-9de1-895115b17ad0\",\n  \"status\": \"OPEN\",\n  \"balance\": 249.93,\n  \"created\": \"2021-07-21T17:32:28Z\"\n },\n {\n  \"name\": \"Credit Card\",\n  \"type\": \"CREDIT\",\n  \"id\": \"123843d8-ffc6-4603-9cc2-996a43d60faf\",\n  \"status\": \"OPEN\",\n  \"balance\": -3848.39,\n  \"created\": \"2021-01-24T107:34:56Z\"\n }\n]"
+                        },
+                        {
+                            "id": "4e804a78-2a00-4cf2-8619-4fc61869d317",
+                            "name": "Returns the list of accounts available to the user Copy",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/accounts?status=OPEN",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "accounts"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "status",
+                                            "value": "OPEN",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "[\n {\n  \"name\": \"Everyday Savings Account\",\n  \"type\": \"SAVINGS\",\n  \"id\": \"f187170c-f84e-497a-9de1-895115b17ad0\",\n  \"status\": \"OPEN\",\n  \"balance\": 249.93,\n  \"created\": \"2021-07-21T17:32:28Z\"\n },\n {\n  \"name\": \"Credit Card\",\n  \"type\": \"CREDIT\",\n  \"id\": \"123843d8-ffc6-4603-9cc2-996a43d60faf\",\n  \"status\": \"OPEN\",\n  \"balance\": -3848.39,\n  \"created\": \"2021-01-24T107:34:56Z\"\n }\n]"
+                        },
+                        {
+                            "id": "cdacf449-d11e-4a91-a3af-0760cc5dd916",
+                            "name": "Invalid status value",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/accounts?status=abcd",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "accounts"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "status",
+                                            "value": "abcd"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a new account for this user",
+                    "id": "4ca1465e-63b7-4a7c-a09a-2a473e383dcf",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "auth": {
+                            "type": "oauth2"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Everyday Savings Account\",\n    \"type\": \"SAVINGS\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/accounts",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "accounts"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "id": "c0da234a-34ce-40d1-835e-569715694519",
+                            "name": "Account created successfully",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Everyday Savings Account\",\n    \"type\": \"SAVINGS\",\n    \"statys\": \"CLOSED\",\n    \"balance\": 249.93,\n    \"created\": \"2021-07-21T17:32:28Z\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/accounts",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "accounts"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"name\": \"Everyday Savings Account\",\n \"type\": \"SAVINGS\",\n \"id\": \"{{$randomUUID}}\",\n \"status\": \"OPEN\",\n \"balance\": 0,\n \"created\": \"{{$randomDatePast}}\"\n}"
+                        },
+                        {
+                            "id": "12dca6da-0396-4ee8-b070-d0bb4da1e708",
+                            "name": "Invalid Account Details",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"type\": \"SAVINGS\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/accounts",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "accounts"
+                                    ]
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                        }
+                    ]
+                }
+            ],
+            "id": "cb582e34-363c-4fcd-9f6d-6bd2fa40a008"
+        },
+        {
+            "name": "payments",
+            "item": [
+                {
+                    "name": "{payment Id}",
+                    "item": [
+                        {
+                            "name": "Get a Payment by ID",
+                            "id": "ebeb5fc8-0b11-41f0-9452-1963e7951c8d",
+                            "request": {
+                                "auth": {
+                                    "type": "oauth2"
+                                },
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/payments/:paymentId",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "payments",
+                                        ":paymentId"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "id": "52f7f2e5-4666-4ebb-adf8-506fdcd7ec26",
+                                            "key": "paymentId",
+                                            "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                            "description": "(Required) ID of the payment to return"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": [
+                                {
+                                    "id": "062e31e9-2a42-4169-b665-676c73ec5bae",
+                                    "name": "Returns the payment referenced by the ID",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/payments/:paymentId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "payments",
+                                                ":paymentId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "paymentId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) ID of the payment to return"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": \"PENDING\",\n \"id\": \"f187170c-f84e-497a-9de1-895115b17ad0\",\n \"reference\": \"Car Loan payment\",\n \"amount\": 73.39,\n \"created\": \"2021-07-21T17:32:28Z\",\n \"scheduled\": \"2021-07-21T17:32:28Z\"\n}"
+                                },
+                                {
+                                    "id": "6b07e521-912a-449b-a5e9-fe94cf6355c2",
+                                    "name": "Invalid ID supplied",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/payments/:paymentId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "payments",
+                                                ":paymentId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "paymentId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) ID of the payment to return"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                },
+                                {
+                                    "id": "8598aefd-122b-4533-9541-5b460343895d",
+                                    "name": "Payment not found",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/payments/:paymentId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "payments",
+                                                ":paymentId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "paymentId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) ID of the payment to return"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Not Found",
+                                    "code": 404,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Deletes a future Payment by ID",
+                            "id": "968ba744-a3e8-4671-ac8e-37d7e393a972",
+                            "request": {
+                                "auth": {
+                                    "type": "oauth2"
+                                },
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/payments/:paymentId",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "payments",
+                                        ":paymentId"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "id": "89ddcc22-51e7-4c21-bf03-bbdc4278dfbc",
+                                            "key": "paymentId",
+                                            "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                            "description": "(Required) Payment ID to delete"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": [
+                                {
+                                    "id": "c60c28fc-1476-4574-8a13-a6ae468bfbfe",
+                                    "name": "Payment Deleted successfully",
+                                    "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/payments/:paymentId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "payments",
+                                                ":paymentId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "paymentId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) Payment ID to delete"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "No Content",
+                                    "code": 204,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                },
+                                {
+                                    "id": "7b82f88f-29e2-4ff1-b489-66e72516a0da",
+                                    "name": "Invalid ID supplied",
+                                    "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/payments/:paymentId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "payments",
+                                                ":paymentId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "paymentId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) Payment ID to delete"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                },
+                                {
+                                    "id": "4321fa2e-4c58-4286-ab50-349a45f6d999",
+                                    "name": "Payment not found",
+                                    "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/payments/:paymentId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "payments",
+                                                ":paymentId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "paymentId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) Payment ID to delete"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Not Found",
+                                    "code": 404,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                },
+                                {
+                                    "id": "c1371e53-1338-4f35-8480-ec7c2fd617ec",
+                                    "name": "Payment not in Pending state",
+                                    "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: oauth2",
+                                                "key": "Authorization",
+                                                "value": "<token>"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/payments/:paymentId",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "payments",
+                                                ":paymentId"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "paymentId",
+                                                    "value": "75778ec9-d158-ab34-93e3-87cde1303df8",
+                                                    "description": "(Required) Payment ID to delete"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                    "code": 422,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                                }
+                            ]
+                        }
+                    ],
+                    "id": "81481f43-e297-43d2-9d3b-cca1b6f3a5b0"
+                },
+                {
+                    "name": "Returns the list of payments for the user",
+                    "id": "1ad63bbb-c15d-4a6d-95ba-0774d830fc90",
+                    "request": {
+                        "auth": {
+                            "type": "oauth2"
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/payments?status=pending",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "payments"
+                            ],
+                            "query": [
+                                {
+                                    "key": "status",
+                                    "value": "pending",
+                                    "description": "Filters based on the payment status"
+                                }
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "id": "894f3204-5c25-42b7-879a-0d727fa42076",
+                            "name": "Returns the list of payments for the user",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/payments?status=PENDING",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "payments"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "status",
+                                            "value": "PENDING"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "[\n {\n  \"status\": \"PENDING\",\n  \"id\": \"f187170c-f84e-497a-9de1-895115b17ad0\",\n  \"reference\": \"Car Loan payment\",\n  \"amount\": 73.39,\n  \"created\": \"2021-07-21T17:32:28Z\",\n  \"scheduled\": \"2021-07-21T17:32:28Z\"\n },\n {\n  \"status\": \"PENDING\",\n  \"id\": \"f187170c-f84e-497a-9de1-895115b17ad0\",\n  \"reference\": \"Car Loan payment\",\n  \"amount\": 73.39,\n  \"created\": \"2021-07-21T17:32:28Z\",\n  \"scheduled\": \"2021-07-21T17:32:28Z\"\n }\n]"
+                        },
+                        {
+                            "id": "ca91f9a1-29bc-4b52-81e8-66ab6ef16a77",
+                            "name": "Invalid status value",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/payments?status=pending",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "payments"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "status",
+                                            "value": "pending"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a new payment for this user",
+                    "id": "24af3621-fae3-44ad-902d-8199ff1b5769",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "auth": {
+                            "type": "oauth2"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"PENDING\",\n    \"reference\": \"Car Loan payment\",\n    \"amount\": 73.39,\n    \"scheduled\": \"2021-07-21T17:32:28Z\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/payments",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "payments"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "id": "0135adb6-8170-47f4-abfa-9e20a55a723c",
+                            "name": "Payment created successfully",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"type\": \"PENDING\",\n    \"reference\": \"Car Loan payment\",\n    \"amount\": 73.39,\n    \"created\": \"2021-07-21T17:32:28Z\",\n    \"scheduled\": \"2021-07-21T17:32:28Z\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/payments",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "payments"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"status\": \"PENDING\",\n \"id\": \"{{$randomUUID}}\",\n \"reference\": \"Car Loan payment\",\n \"amount\": 73.39,\n \"created\": \"2021-07-21T17:32:28Z\",\n \"scheduled\": \"2021-07-21T17:32:28Z\"\n}"
+                        },
+                        {
+                            "id": "7771d5ea-508e-418b-8bc9-ae119e8cb593",
+                            "name": "Invalid Payment Details",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"type\": \"PENDING\",\n    \"reference\": \"Car Loan payment\",\n    \"amount\": 73.39,\n    \"created\": \"2021-07-21T17:32:28Z\",\n    \"scheduled\": \"2021-07-21T17:32:28Z\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/payments",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "payments"
+                                    ]
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"status\": 422,\n \"message\": \"There was an error processing your request. Please contact support@pmbank.com.\"\n}"
+                        }
+                    ]
+                }
+            ],
+            "id": "7fa0b47d-4223-4fe7-86c0-6b9918045166"
+        },
+        {
+            "name": "Returns the user profile",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "4a42b10b-145b-41a8-9fa7-e0345c0b19d5",
+                        "exec": [
+                            "",
+                            "//Field Level Contract Tests",
+                            "/**",
+                            " * required: ",
+                            "      - id",
+                            "      - firstName",
+                            "      - lastName",
+                            "      - email",
+                            "    properties:",
+                            "      id:",
+                            "        type: string",
+                            "        format: uuid",
+                            "        example: \"f187170c-f84e-497a-9de1-895115b17ad0\"",
+                            "      firstName:",
+                            "        type: string",
+                            "        example: \"John\"",
+                            "      lastName:",
+                            "        type: string",
+                            "        example: \"Smith\"",
+                            "      email:",
+                            "        type: string",
+                            "        format: email",
+                            "        example: \"john.smith@example.com\"",
+                            "      created:",
+                            "        type: string",
+                            "        format: date-time",
+                            "        example: \"2021-07-21T17:32:28Z\"",
+                            " */",
+                            "",
+                            "pm.test(\"Has required fields\", () => {",
+                            "    pm.expect(pm.response.json().id).to.not.be.undefined;",
+                            "    pm.expect(pm.response.json().firstName).to.not.be.undefined;",
+                            "    pm.expect(pm.response.json().lastName).to.not.be.undefined;",
+                            "    pm.expect(pm.response.json().email).to.not.be.undefined;",
+                            "});",
+                            "",
+                            "pm.test(\"ID is valid\", () => {",
+                            "    pm.expect(pm.response.json().id).to.be.a(\"string\");",
+                            "    pm.expect(pm.response.json().id).to.have.lengthOf(36)",
+                            "});",
+                            "",
+                            "pm.test(\"firstName is valid\", () => {",
+                            "    pm.expect(pm.response.json().firstName).to.be.a(\"string\");",
+                            "    pm.expect(pm.response.json().firstName).to.match(/[A-Za-z\\-]{2,30}/)",
+                            "});",
+                            "",
+                            "pm.test(\"lastName is valid\", () => {",
+                            "    pm.expect(pm.response.json().lastName).to.be.a(\"string\");",
+                            "    pm.expect(pm.response.json().lastName).to.match(/[A-Za-z\\-]{2,30}/)",
+                            "});",
+                            "",
+                            "pm.test(\"email is valid\", () => {",
+                            "    let email = pm.response.json().email;",
+                            "    let emailRegexp = /^(([^<>()[\\]\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@(([^<>()[\\]\\.,;:\\s@\\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\\"]{2,})$/;",
+                            "",
+                            "    if(!email) {",
+                            "        return true;",
+                            "    }",
+                            "",
+                            "    pm.expect(pm.response.json().email).to.be.a(\"string\");",
+                            "    pm.expect(pm.response.json().email).to.match(emailRegexp);",
+                            "});",
+                            "",
+                            "pm.test(\"created is valid\", () => {",
+                            "    pm.expect(pm.response.json().created).to.be.a(\"string\");",
+                            "",
+                            "    var momentDate = require('moment')(pm.response.json().created);",
+                            "    pm.expect(momentDate.isValid()).to.be.true;",
+                            "",
+                            "    var dateRegex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$/",
+                            "    pm.expect(pm.response.json().created).to.match(dateRegex);",
+                            "});",
+                            "",
+                            "//Response Level Contract Tests",
+                            "/**",
+                            " * responses:",
+                            "        \"200\":",
+                            "          description: \"Returns the user profile\"",
+                            "          schema:",
+                            "            $ref: \"#/definitions/User\"",
+                            " * ",
+                            " */",
+                            "",
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "id": "6a992b34-f35a-4d04-b057-4a17bc414504",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "auth": {
+                    "type": "oauth2"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/user",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "user"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "id": "4dbbf510-8940-4fc7-91e0-1e668535efea",
+                    "name": "Returns the user profile",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/user",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "user"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "cookie": [],
+                    "responseTime": null,
+                    "body": "{\n \"id\": \"f187170c-f84e-497a-9de1-895115b17ad0\",\n \"firstName\": \"John\",\n \"lastName\": \"Smith\",\n \"email\": \"john.smith@example.com\",\n \"created\": \"2021-07-21T17:32:28Z\"\n}"
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "oauth2"
+    },
+    "variable": [
+        {
+            "id": "d7509b69-e26c-4330-9542-f927e50b971a",
+            "key": "baseUrl",
+            "value": "https://postman.com/v1",
+            "type": "string"
+        }
+    ]
+}

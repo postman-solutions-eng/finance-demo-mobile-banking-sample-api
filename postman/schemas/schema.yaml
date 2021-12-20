@@ -1,0 +1,528 @@
+swagger: "2.0"
+info:
+  description: "This is a sample API simulating how a mobile banking application might interact with the banking services."
+  version: "1.0.0"
+  title: "PM Bank - Mobile Banking API"
+  contact:
+    email: "solutions@postman.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+externalDocs:
+  description: "Find out more about PM Bank"
+  url: "http://www.postman.com"
+host: "f7f031d0-8fce-4bd9-a743-6a60e1fa3812.mock.pstmn.io"
+schemes:
+- "https"
+securityDefinitions:
+  mobile_banking_auth:
+    type: "oauth2"
+    authorizationUrl: "https://sample.postman.com/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      read:user: "read your user details"
+      read:account: "read your account details"
+      write:account: "modify/delete your account information"
+      read:payment: "read your payment details"
+      write:payment: "create new payments"
+security:
+  - mobile_banking_auth: []
+paths:
+  /user:
+    put:
+      tags:
+      - "User"
+      summary: "Updates the user profile"
+      description: ""
+      operationId: "updateUserProfile"
+      produces:
+      - "application/json"
+      responses:
+        "204":
+          description: "Returns the user profile"
+          schema:
+            $ref: "#/definitions/User"
+      security:
+      - mobile_banking_auth:
+        - "write:user"
+    get:
+      tags:
+      - "User"
+      summary: "Returns the user profile"
+      description: ""
+      operationId: "getUserProfile"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Returns the user profile"
+          schema:
+            $ref: "#/definitions/User"
+      security:
+      - mobile_banking_auth:
+        - "read:user"
+  /accounts:
+    get:
+      tags:
+      - "Account"
+      summary: "Returns the list of accounts for the user"
+      description: ""
+      operationId: "getUserAccounts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "status"
+        in: "query"
+        description: "Filters based on the account status"
+        required: false
+        type: "string"
+        default: "open"
+      responses:
+        "200":
+          description: "Returns the list of accounts available to the user"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Account"
+        "400":
+          description: "Invalid status value"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - mobile_banking_auth:
+        - "read:account"
+    post:
+      tags:
+        - "Account"
+      summary: "Create a new account for this user"
+      description: ""
+      operationId: "createUserAccount"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Account details"
+        required: true
+        schema:
+          $ref: "#/definitions/AccountProperties"
+      responses:
+        "200":
+          description: "Account created successfully"
+          schema:
+            $ref: "#/definitions/Account"
+        "400":
+          description: "Invalid Account Details"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - mobile_banking_auth:
+        - "write:account"
+  /accounts/{accountId}:
+    get:
+      tags:
+      - "Account"
+      summary: "Get an Account by ID"
+      description: ""
+      operationId: "getAccountById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        description: "ID of the account to return"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        "200":
+          description: "Returns the account referenced by the ID"
+          schema:
+            $ref: "#/definitions/Account"
+        "400":
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
+        "404":
+          description: "Account not found"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - mobile_banking_auth:
+        - "read:account"
+    delete:
+      tags:
+      - "Account"
+      summary: "Deletes an Account by ID"
+      description: ""
+      operationId: "deleteAccountById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        description: "Account ID to delete"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        "204":
+          description: "Account Deleted successfully"
+        "400":
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
+        "404":
+          description: "Account not found"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - mobile_banking_auth:
+        - "write:account"
+  /accounts/{accountId}/transactions:
+    get:
+      tags:
+      - "Transaction"
+      summary: "Get an Account Transactions by ID"
+      description: ""
+      operationId: "getAccountTransactionsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        description: "ID of the account to search"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        "200":
+          description: "Returns the transactions for the referenced account"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Transaction"
+        "400":
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
+        "404":
+          description: "Account not found"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - mobile_banking_auth:
+        - "read:account"
+  /payments:
+    get:
+      tags:
+      - "Payment"
+      summary: "Returns the list of payments for the user"
+      description: ""
+      operationId: "getUserPayments"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "status"
+        in: "query"
+        description: "Filters based on the payment status"
+        required: false
+        type: "string"
+        enum:
+          - paid
+          - pending
+          - failed
+      responses:
+        "200":
+          description: "Returns the list of payments for the user"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Payment"
+        "400":
+          description: "Invalid status value"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - mobile_banking_auth:
+        - "read:payment"
+    post:
+      tags:
+        - "Payment"
+      summary: "Create a new payment for this user"
+      description: ""
+      operationId: "createNewPayment"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Payment details"
+        required: true
+        schema:
+          $ref: "#/definitions/PaymentProperties"
+      responses:
+        "200":
+          description: "Payment created successfully"
+          schema:
+            $ref: "#/definitions/Payment"
+        "400":
+          description: "Invalid Payment Details"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - mobile_banking_auth:
+        - "write:payment"
+  /payments/{paymentId}:
+    get:
+      tags:
+      - "Payment"
+      summary: "Get a Payment by ID"
+      description: ""
+      operationId: "getPaymentByID"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "paymentId"
+        in: "path"
+        description: "ID of the payment to return"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        "200":
+          description: "Returns the payment referenced by the ID"
+          schema:
+            $ref: "#/definitions/Payment"
+        "400":
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
+        "404":
+          description: "Payment not found"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - mobile_banking_auth:
+        - "read:payment"
+    delete:
+      tags:
+      - "Payment"
+      summary: "Deletes a future Payment by ID"
+      description: ""
+      operationId: "deletePaymentById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "paymentId"
+        in: "path"
+        description: "Payment ID to delete"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        "204":
+          description: "Payment Deleted successfully"
+          schema:
+            $ref: "#/definitions/Error"
+        "400":
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
+        "404":
+          description: "Payment not found"
+          schema:
+            $ref: "#/definitions/Error"
+        "422":
+          description: "Payment not in Pending state"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - mobile_banking_auth:
+        - "write:account"
+definitions:
+  User:
+    type: object
+    required: 
+      - id
+      - firstName
+      - lastName
+      - email
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: "f187170c-f84e-497a-9de1-895115b17ad0"
+        description: The ID of the user
+      firstName:
+        type: string
+        example: "John"
+        description: The first name of the user
+      lastName:
+        type: string
+        example: "Smith"
+        description: The last name of the user
+      email:
+        type: string
+        format: email
+        example: "john.smith@example.com"
+        description: The email of the user
+      created:
+        type: string
+        format: date-time
+        example: "2021-07-21T17:32:28Z"
+        description: The date time the user account was created
+  Account:
+    allOf: 
+      - $ref: '#/definitions/AccountID'
+      - $ref: '#/definitions/AccountProperties'
+  AccountID:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: "f187170c-f84e-497a-9de1-895115b17ad0"
+        description: The ID of the account
+  AccountProperties:
+    type: object
+    required: 
+      - name
+      - type
+    properties:
+      name:
+        type: string
+        example: "Everyday Savings Account"
+        description: The name of the account
+      status:
+        type: string
+        enum: 
+          - OPEN
+          - CLOSED
+        description: The status of the account
+      type:
+        type: string
+        enum: 
+          - SAVINGS
+          - CREDIT
+          - CHEQUE
+          - LOAN
+        example: "SAVINGS"
+        description: The type of the account
+      balance:
+        type: number
+        format: float
+        example: 249.93
+        description: The balance of the account
+      created:
+        type: string
+        format: date-time
+        example: "2021-07-21T17:32:28Z"
+        description: The date time the account was created
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: "584c0f97-7aeb-4000-bf1e-291c2ac4199b"
+        description: The ID of the transaction
+      created:
+        type: string
+        format: date-time
+        example: "2021-07-21T17:32:28Z"
+        description: The date time the transaction was created
+      amount:
+        type: number
+        format: float
+        example: 120.00
+        description: The amount of the transaction
+      paymentReference:
+        type: string
+        format: uuid
+        example: "aa7fdd48-78ac-420f-8438-0ac9ae3c8bc8"
+        description: The reference for the transaction
+      recipient:
+        $ref: "#/definitions/Recipient"
+  Recipient:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: "cdfd6d52-9eb3-48e1-94f6-eef56994fb55"
+        description: The ID of the recipient of the transaction
+      name:
+        type: string
+        example: "Insurance Inc"
+        description: The name of the recipient
+      description:
+        type: string
+        example: "Car Insurance Monthly Payment"
+        description: The text description of the transaction
+      reference:
+        type: string
+        example: "20892002"
+        description: The reference of the transaction
+  Payment:
+    allOf: 
+      - $ref: '#/definitions/PaymentID'
+      - $ref: '#/definitions/PaymentProperties'
+  PaymentID:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: "f187170c-f84e-497a-9de1-895115b17ad0"
+        description: The ID of the payment
+  PaymentProperties:
+    type: object
+    required: 
+      - status
+      - amount
+    properties:
+      reference:
+        type: string
+        example: "Car Loan payment"
+        description: The description of the payment
+      status:
+        type: string
+        enum: 
+          - PAID
+          - PENDING
+          - FAILED
+        example: "PENDING"
+        description: The status of the payment
+      amount:
+        type: number
+        format: float
+        example: 73.39
+        description: The amount of the payment
+      created:
+        type: string
+        format: date-time
+        example: "2021-07-21T17:32:28Z"
+        description: The date time the payment was created
+      scheduled:
+        type: string
+        format: date-time
+        example: "2021-07-21T17:32:28Z"
+        description: The date time the payment was scheduled
+  Error:
+    type: object
+    properties:
+      status: 
+        type: number
+        format: int32
+        example: 422
+        description: The ID of the error
+      message:
+        type: string
+        example: "There was an error processing your request. Please contact support@pmbank.com."
+        description: The description of the error
+        
